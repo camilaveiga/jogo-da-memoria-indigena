@@ -91,8 +91,10 @@ function checkMatch() {
   }, 500);
 }
 
+
 // Carrega os dados do arquivo JSON
 async function loadCardsData() {
+
   try {
     const response = await fetch("./cards.json");
     if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
@@ -106,3 +108,5 @@ async function loadCardsData() {
 }
 
 loadCardsData();
+
+
