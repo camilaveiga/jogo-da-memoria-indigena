@@ -9,43 +9,62 @@
   <script src="https://kit.fontawesome.com/e39deb920a.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="header">
+  <!-- Tela Inicial -->
+  <div id="homeScreen" class="home-screen">
+    <img src="img/favicon.png" alt="Logo" class="logo-swing" />
+    <h1 class="home-title">Jogo da Memória Indígena</h1>
+    <button id="playButton" class="play-button">PLAY</button>
+  </div>
+
+  <!-- Cabeçalho do jogo -->
+  <header class="header">
     <h1 class="logo">
       <img src="img/favicon.png" alt="Logo do jogo" class="logo-img" />
-      Jogo da Memória: Palavras Indígenas
+      Jogo da Memória Indígena
     </h1>
-    <i class="fa-solid fa-circle-info info-icon" id="infoButton"></i>
-  </div>
+    <i class="fa-solid fa-circle-info info-icon" id="infoButton" aria-label="Informações sobre o jogo"></i>
+  </header>
+
+  <!-- Conteúdo principal -->
   <main>
+    <!-- Instruções e créditos -->
     <section class="info" id="howToPlay" style="display: none;">
-      <i class="fa-solid fa-xmark" id="closeInfo"></i>
+      <i class="fa-solid fa-xmark" id="closeInfo" aria-label="Fechar informações"></i>
       <div>
-        <h2>COMO JOGAR</h2>
+        <h2>Como Jogar</h2>
         <p>
           No jogo da memória, você deve clicar em duas cartas para revelá-las. 
           O objetivo é encontrar os pares formados por uma palavra e sua respectiva dica. 
-          O jogo continua até que todos os pares sejam combinados corretamente.
-          Boa sorte!
+          O jogo continua até que todos os pares sejam combinados corretamente. Boa sorte!
         </p>
       </div>
       <div>
-        <h2>CREDITOS</h2>
-        <P>
+        <h2>Créditos</h2>
+        <p>
           Designed and created by
-            <a href="https://github.com/camilaveiga" target="_blank"
-              >Camila Veiga</a>
-        </P>
+          <a href="https://github.com/camilaveiga" target="_blank">Camila Veiga</a>
+        </p>
       </div>
     </section>
 
+    <!-- Tabuleiro do jogo -->
     <div class="game-board" id="gameBoard"></div>
-    <div id="winMessage" class="hidden">🎉 Parabéns! Você venceu! 🎉</div>
+
+    <!-- Mensagem de vitória -->
+    <div id="winMessage" class="win-message hidden" role="alert" aria-live="assertive">
+      <div>🎉 Parabéns! Você venceu! 🎉</div>
+      <button id="replayButton" class="replay-button">Jogar Novamente</button>
+      <button id="exitButton" class="exit-button">Sair</button>
+    </div>
   </main>
+
+  <!-- Script do jogo -->
+  <script src="script.js"></script>
+  <script>
+    // Adiciona o evento do botão Sair aqui, para evitar inline JS
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("exitButton").addEventListener("click", voltarParaHome);
+    });
+  </script>
 </body>
-<div id="homeScreen" class="home-screen">
-  <img src="img/favicon.png" alt="Logo" class="home-logo" />
-  <h1 class="home-title">Jogo da Memória: Palavras Indígenas</h1>
-  <button id="playButton" class="play-button">PLAY</button>
-</div>
-<script src="script.js"></script>
 </html>

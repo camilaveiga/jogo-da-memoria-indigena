@@ -3,10 +3,12 @@ let flippedCards = [];
 let lockBoard = false;
 let cardsDataGlobal = [];
 
+// Embaralha o array
 function shuffle(array) {
   return array.sort(() => 0.5 - Math.random());
 }
 
+// Cria pares de cartas (palavra e dica)
 function createCards(cardsData) {
   const allCards = [];
 
@@ -18,7 +20,11 @@ function createCards(cardsData) {
   return shuffle(allCards);
 }
 
+// Renderiza as cartas no tabuleiro
 function renderCards(cardsData) {
+  gameBoard.style.display = "grid"; // garante que o tabuleiro esteja visível
+  gameBoard.innerHTML = "";          // limpa antes de renderizar
+
   const cards = createCards(cardsData);
 
   cards.forEach(cardData => {
@@ -46,6 +52,7 @@ function renderCards(cardsData) {
   });
 }
 
+// Lógica de virar carta
 function flipCard(card) {
   if (lockBoard || card.classList.contains("flipped") || card.classList.contains("matched")) return;
 
@@ -57,6 +64,7 @@ function flipCard(card) {
   }
 }
 
+// Verifica se as duas cartas formam par
 function checkMatch() {
   const [first, second] = flippedCards;
 
@@ -66,30 +74,38 @@ function checkMatch() {
   if (firstId === secondId && first !== second) {
     first.classList.add("matched");
     second.classList.add("matched");
+    resetBoard();
+    checkWin();
   } else {
     lockBoard = true;
     setTimeout(() => {
       first.classList.remove("flipped");
       second.classList.remove("flipped");
-      lockBoard = false;
+      resetBoard();
     }, 1500);
   }
-
-  flippedCards = [];
-
-  setTimeout(() => {
-    const allMatched = document.querySelectorAll('.card.matched').length;
-    const totalCards = cardsDataGlobal.length * 2;
-
-    if (allMatched === totalCards) {
-      const winMessage = document.getElementById("winMessage");
-      if (winMessage) {
-        winMessage.classList.add("visible");
-      }
-    }
-  }, 500);
 }
 
+function resetBoard() {
+  flippedCards = [];
+  lockBoard = false;
+}
+
+// Verifica se todas as cartas foram combinadas
+function checkWin() {
+  const allMatched = document.querySelectorAll('.card.matched').length;
+  const totalCards = cardsDataGlobal.length * 2;
+
+  if (allMatched === totalCards) {
+    const winMessage = document.getElementById("winMessage");
+    if (winMessage) {
+      winMessage.classList.remove("hidden");
+      winMessage.classList.add("visible");
+    }
+  }
+}
+
+// Carrega os dados das cartas do arquivo JSON e inicia o jogo
 async function loadCardsData() {
   try {
     const response = await fetch("./cards.json");
@@ -102,26 +118,60 @@ async function loadCardsData() {
   }
 }
 
-// Mostra e esconde a caixa "COMO JOGAR"
-const infoButton = document.getElementById("infoButton");
-const howToPlay = document.getElementById("howToPlay");
-const closeInfo = document.getElementById("closeInfo");
+// Função para voltar à tela inicial
+function voltarParaHome() {
+  const winMessage = document.getElementById("winMessage");
+  if (winMessage) {
+    winMessage.classList.remove("visible");
+    winMessage.classList.add("hidden");
+  }
 
-infoButton.addEventListener("click", () => {
-  howToPlay.style.display = "flex";
+  gameBoard.innerHTML = "";
+  gameBoard.style.display = "none";
+
+  const homeScreen = document.getElementById("homeScreen");
+  homeScreen.style.display = "flex";
+  homeScreen.style.opacity = "1"; // se usar animação de opacidade
+}
+
+// Eventos após o carregamento do DOM
+document.addEventListener("DOMContentLoaded", () => {
+  // Botão PLAY da tela inicial
+  document.getElementById("playButton").addEventListener("click", () => {
+    const home = document.getElementById("homeScreen");
+    home.style.opacity = "0";
+
+    setTimeout(() => {
+      home.style.display = "none";
+      loadCardsData(); // inicia o jogo
+    }, 500);
+  });
+
+  // Botão REPLAY na mensagem de vitória
+  document.getElementById("replayButton").addEventListener("click", () => {
+    const winMessage = document.getElementById("winMessage");
+    if (winMessage) {
+      winMessage.classList.remove("visible");
+      winMessage.classList.add("hidden");
+    }
+    flippedCards = [];
+    lockBoard = false;
+    loadCardsData();
+  });
+
+  // Botão SAIR na mensagem de vitória
+  document.getElementById("exitButton").addEventListener("click", voltarParaHome);
+
+  // Botões de informação
+  const infoButton = document.getElementById("infoButton");
+  const howToPlay = document.getElementById("howToPlay");
+  const closeInfo = document.getElementById("closeInfo");
+
+  infoButton.addEventListener("click", () => {
+    howToPlay.style.display = "flex";
+  });
+
+  closeInfo.addEventListener("click", () => {
+    howToPlay.style.display = "none";
+  });
 });
-
-closeInfo.addEventListener("click", () => {
-  howToPlay.style.display = "none";
-});
-
-document.getElementById("playButton").addEventListener("click", () => {
-  const home = document.getElementById("homeScreen");
-  home.style.opacity = "0";
-
-  setTimeout(() => {
-    home.style.display = "none";
-    loadCardsData(); // 👈 Começa o jogo só depois de sair da home
-  }, 500);
-});
-

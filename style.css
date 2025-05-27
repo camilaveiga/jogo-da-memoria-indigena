@@ -1,15 +1,18 @@
+/* ----------- GERAL ----------- */
 body {
   font-family: Arial, sans-serif;
   background-color: #ba8edd;
   text-align: center;
   padding: 20px;
+  margin: 0;
 }
 
 h1 {
   color: #502870;
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+/* ----------- CABEÇALHO ----------- */
 .header {
   display: flex;
   justify-content: space-between;
@@ -17,24 +20,26 @@ h1 {
   padding: 10px 30px;
 }
 
+/* Fonte personalizada */
 @font-face {
-  font-family: maria_lucia;
-  src: url("/fonts/Maria_lucia.ttf")
+  font-family: 'Bestime';
+  src: url('/fonts/Bestime.ttf') format('truetype');
 }
+
 .logo {
   margin: 0;
   font-size: 1.6rem;
   color: #502870;
-  font-family: maria_lucia;
-  text-shadow: 2px 2px 5px rgb(132, 125, 178);
+  font-family: 'Bestime', cursive;
+  text-shadow: 2px 2px 5px rgba(179, 179, 179, 0.6);
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
   height: 32px;
-  vertical-align: middle;
   margin-right: 10px;
 }
-
 
 .info-icon {
   font-size: 1.3rem;
@@ -42,81 +47,75 @@ h1 {
   cursor: pointer;
 }
 
-/** section info **/
-
+/* ----------- MODAL DE INSTRUÇÕES ----------- */
 .info {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  padding: 50px;
-  z-index: 3;
-
+  width: 90%;
+  max-width: 400px;
+  padding: 30px;
+  z-index: 1000;
   background-color: #aef6a2;
   box-shadow: 4px 4px 5px rgb(52, 45, 94);
-  opacity:0.9;
+  opacity: 0.95;
   border: 3px solid #502870;
   border-radius: 15px;
 
   display: flex;
   flex-direction: column;
   gap: 30px;
-
-  animation: surgir 0.5s forwards;
+  animation: fadeInScale 0.7s ease-out;
 }
-
 
 .fa-xmark {
   position: absolute;
   top: 20px;
   right: 20px;
+  cursor: pointer;
 }
 
 .info h2 {
   margin-bottom: 15px;
+  font-family: 'Bestime', cursive;
 }
 
 .info p {
   color: #502870;
-  margin-top: 5px;
   text-align: justify;
 }
 
 .info a {
-  font-weight: bolder;
-  color:#502870;
+  font-weight: bold;
+  color: #502870;
   text-decoration: none;
-
   transition: color 0.5s;
 }
 
 .info a:hover {
-  color: #502870;
+  color: #3a1e52;
 }
 
-/** JOGO **/
-
+/* ----------- TABULEIRO DO JOGO ----------- */
 .game-board {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 15px;
-    justify-items: center;
-    align-items: center;
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 0 10px;
-  }
-  
-/** cartas **/
-  .card {
-    perspective: 1000px;
-    width: 100%;
-    max-width: 150px;
-    height: 150px;
-  }
-  
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  justify-items: center;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 0 10px;
+}
+
+/* ----------- CARTAS ----------- */
+.card {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 150px;
+  height: 150px;
+}
+
 .card-inner {
   width: 100%;
   height: 100%;
@@ -129,7 +128,8 @@ h1 {
   transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+.card-front,
+.card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -146,62 +146,77 @@ h1 {
   font-weight: bold;
 }
 
+.card-front:hover {
+  transform: scale(1.1);
+}
+
 .card-back {
   background-color: #aef6a2;
   transform: rotateY(180deg);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .card.matched .card-inner {
-    transform: rotateY(180deg);
-    pointer-events: none; 
+  transform: rotateY(180deg);
+  pointer-events: none;
 }
 
 .card.matched .card-back {
-  opacity: 0.5; /* semi-transparente */
-  pointer-events: none; /* evita clique após combinar */
+  opacity: 0.5;
+  pointer-events: none;
   transition: opacity 0.3s ease;
   cursor: default;
 }
 
-.card-back {
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* ----------- MENSAGEM DE VITÓRIA ----------- */
+#winMessage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  color: #502870;
+  background-color: #ffffffdd;
+  padding: 20px 40px;
+  border: 3px solid #502870;
+  border-radius: 20px;
+  z-index: 999;
+  display: none;
+  animation: fadeInScale 1s ease-out;
 }
 
+#winMessage.visible {
+  display: block;
+}
 
-/** winMessage **/
+/* ----------- ANIMAÇÕES ----------- */
+@keyframes fadeInScale {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
 
-#winMessage {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2.5rem;
-    color: #502870;
-    background-color: #ffffffdd;
-    padding: 20px 40px;
-    border: 3px solid #502870;
-    border-radius: 20px;
-    z-index: 999;
-    display: none;
-    animation: fadeInScale 1s ease-out;
-  }
-  
-  @keyframes fadeInScale {
-    0% {
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-    }
-  }
-  
-  #winMessage.visible {
-    display: block;
-  }
+@keyframes swing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
 
-/** TELA HOME **/
+/* ----------- TELA INICIAL ----------- */
+.logo-swing {
+  animation: swing 2s infinite ease-in-out;
+  display: inline-block;
+  transform-origin: center;
+  width: 180px;
+  margin-bottom: 20px;
+}
 
 .home-screen {
   position: fixed;
@@ -218,32 +233,49 @@ h1 {
   transition: opacity 0.5s ease;
 }
 
-.home-logo {
-  width: 180px;
-  margin-bottom: 20px;
-}
-
 .home-title {
   color: #502870;
   font-size: 2rem;
   margin-bottom: 30px;
   text-align: center;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Bestime', cursive;
 }
 
-.play-button {
-  padding: 10px 30px;
+/* ----------- BOTÕES ----------- */
+.play-button,
+.replay-button {
+  padding: 20px 30px;
   font-size: 1.2rem;
   font-weight: bold;
   color: white;
-  background-color: #502870;
+  background-color: #724894;
+  font-family: 'Bestime', cursive;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.play-button:hover {
+.play-button:hover,
+.replay-button:hover {
   background-color: #3a1e52;
 }
 
+
+.exit-button {
+  padding: 20px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #d94f4f;
+  font-family: 'Bestime', cursive;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.exit-button:hover {
+  background-color: #8c2e2e;
+}
