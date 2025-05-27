@@ -23,7 +23,7 @@ h1 {
 /* Fonte personalizada */
 @font-face {
   font-family: 'Bestime';
-  src: url('/fonts/Bestime.ttf') format('truetype');
+  src: url('fonts/Bestime.ttf') format('truetype');
 }
 
 .logo {
