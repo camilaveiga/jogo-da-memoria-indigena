@@ -102,8 +102,6 @@ async function loadCardsData() {
   }
 }
 
-loadCardsData();
-
 // Mostra e esconde a caixa "COMO JOGAR"
 const infoButton = document.getElementById("infoButton");
 const howToPlay = document.getElementById("howToPlay");
@@ -116,3 +114,14 @@ infoButton.addEventListener("click", () => {
 closeInfo.addEventListener("click", () => {
   howToPlay.style.display = "none";
 });
+
+document.getElementById("playButton").addEventListener("click", () => {
+  const home = document.getElementById("homeScreen");
+  home.style.opacity = "0";
+
+  setTimeout(() => {
+    home.style.display = "none";
+    loadCardsData(); // 👈 Começa o jogo só depois de sair da home
+  }, 500);
+});
+

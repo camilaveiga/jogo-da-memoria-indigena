@@ -17,12 +17,24 @@ h1 {
   padding: 10px 30px;
 }
 
+@font-face {
+  font-family: maria_lucia;
+  src: url("/fonts/Maria_lucia.ttf")
+}
 .logo {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   color: #502870;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: maria_lucia;
+  text-shadow: 2px 2px 5px rgb(132, 125, 178);
 }
+
+.logo-img {
+  height: 32px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 
 .info-icon {
   font-size: 1.3rem;
@@ -42,7 +54,8 @@ h1 {
   z-index: 3;
 
   background-color: #aef6a2;
-  opacity:0.8;
+  box-shadow: 4px 4px 5px rgb(52, 45, 94);
+  opacity:0.9;
   border: 3px solid #502870;
   border-radius: 15px;
 
@@ -95,6 +108,7 @@ h1 {
     padding: 0 10px;
   }
   
+/** cartas **/
   .card {
     perspective: 1000px;
     width: 100%;
@@ -123,6 +137,7 @@ h1 {
   border: 3px solid #502870;
   border-radius: 10px;
   background-color: rgb(106, 158, 214);
+  box-shadow: 4px 4px 5px rgb(52, 45, 94);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,6 +155,20 @@ h1 {
     transform: rotateY(180deg);
     pointer-events: none; 
 }
+
+.card.matched .card-back {
+  opacity: 0.5; /* semi-transparente */
+  pointer-events: none; /* evita clique após combinar */
+  transition: opacity 0.3s ease;
+  cursor: default;
+}
+
+.card-back {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+/** winMessage **/
 
 #winMessage {
     position: fixed;
@@ -171,4 +200,50 @@ h1 {
   #winMessage.visible {
     display: block;
   }
+
+/** TELA HOME **/
+
+.home-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ba8edd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+.home-logo {
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.home-title {
+  color: #502870;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.play-button {
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #502870;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+  background-color: #3a1e52;
+}
 

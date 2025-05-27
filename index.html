@@ -4,12 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jogo da Memória Indígena</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
   <link rel="stylesheet" href="style.css" />
   <script src="https://kit.fontawesome.com/e39deb920a.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="header">
-    <h1 class="logo">Jogo da Memória: Palavras Indígenas</h1>
+    <h1 class="logo">
+      <img src="img/favicon.png" alt="Logo do jogo" class="logo-img" />
+      Jogo da Memória: Palavras Indígenas
+    </h1>
     <i class="fa-solid fa-circle-info info-icon" id="infoButton"></i>
   </div>
   <main>
@@ -24,11 +28,24 @@
           Boa sorte!
         </p>
       </div>
+      <div>
+        <h2>CREDITOS</h2>
+        <P>
+          Designed and created by
+            <a href="https://github.com/camilaveiga" target="_blank"
+              >Camila Veiga</a>
+        </P>
+      </div>
     </section>
 
     <div class="game-board" id="gameBoard"></div>
     <div id="winMessage" class="hidden">🎉 Parabéns! Você venceu! 🎉</div>
   </main>
-  <script src="script.js"></script>
 </body>
+<div id="homeScreen" class="home-screen">
+  <img src="img/favicon.png" alt="Logo" class="home-logo" />
+  <h1 class="home-title">Jogo da Memória: Palavras Indígenas</h1>
+  <button id="playButton" class="play-button">PLAY</button>
+</div>
+<script src="script.js"></script>
 </html>
