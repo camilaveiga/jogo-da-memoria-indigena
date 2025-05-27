@@ -1,7 +1,7 @@
 let gameBoard = document.getElementById("gameBoard");
 let flippedCards = [];
 let lockBoard = false;
-let cardsDataGlobal = []; // 🔁 variável global para referência posterior
+let cardsDataGlobal = [];
 
 function shuffle(array) {
   return array.sort(() => 0.5 - Math.random());
@@ -19,7 +19,7 @@ function createCards(cardsData) {
 }
 
 function renderCards(cardsData) {
-  const cards = createCards(cardsData); // ✅ Corrigido: passando cardsData corretamente
+  const cards = createCards(cardsData);
 
   cards.forEach(cardData => {
     const card = document.createElement("div");
@@ -77,10 +77,9 @@ function checkMatch() {
 
   flippedCards = [];
 
-  // Verifica se todas as cartas foram combinadas
   setTimeout(() => {
     const allMatched = document.querySelectorAll('.card.matched').length;
-    const totalCards = cardsDataGlobal.length * 2; // ✅ Agora usa a variável global
+    const totalCards = cardsDataGlobal.length * 2;
 
     if (allMatched === totalCards) {
       const winMessage = document.getElementById("winMessage");
@@ -91,16 +90,12 @@ function checkMatch() {
   }, 500);
 }
 
-
-// Carrega os dados do arquivo JSON
 async function loadCardsData() {
-
   try {
     const response = await fetch("./cards.json");
     if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
     const data = await response.json();
-
-    cardsDataGlobal = data; // ✅ Salva globalmente
+    cardsDataGlobal = data;
     renderCards(data);
   } catch (error) {
     console.error("Erro ao carregar os dados:", error);
@@ -109,4 +104,15 @@ async function loadCardsData() {
 
 loadCardsData();
 
+// Mostra e esconde a caixa "COMO JOGAR"
+const infoButton = document.getElementById("infoButton");
+const howToPlay = document.getElementById("howToPlay");
+const closeInfo = document.getElementById("closeInfo");
 
+infoButton.addEventListener("click", () => {
+  howToPlay.style.display = "flex";
+});
+
+closeInfo.addEventListener("click", () => {
+  howToPlay.style.display = "none";
+});

@@ -5,13 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jogo da Memória Indígena</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/e39deb920a.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <div class="logo">Jogo da Memória: Palavras Indígenas</div>
-  </header>
-  <div class="game-board" id="gameBoard"></div>
-  <div id="winMessage" class="hidden">🎉 Parabéns! Você venceu! 🎉</div>
+  <div class="header">
+    <h1 class="logo">Jogo da Memória: Palavras Indígenas</h1>
+    <i class="fa-solid fa-circle-info info-icon" id="infoButton"></i>
+  </div>
+  <main>
+    <section class="info" id="howToPlay" style="display: none;">
+      <i class="fa-solid fa-xmark" id="closeInfo"></i>
+      <div>
+        <h2>COMO JOGAR</h2>
+        <p>
+          No jogo da memória, você deve clicar em duas cartas para revelá-las. 
+          O objetivo é encontrar os pares formados por uma palavra e sua respectiva dica. 
+          O jogo continua até que todos os pares sejam combinados corretamente.
+          Boa sorte!
+        </p>
+      </div>
+    </section>
+
+    <div class="game-board" id="gameBoard"></div>
+    <div id="winMessage" class="hidden">🎉 Parabéns! Você venceu! 🎉</div>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>

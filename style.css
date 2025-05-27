@@ -10,11 +10,76 @@ h1 {
   font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.logo{
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.3rem;
   color: #502870;
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  vertical-align: middle;
-  margin-right: 10px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.info-icon {
+  font-size: 1.3rem;
+  color: #502870;
+  cursor: pointer;
+}
+
+/** section info **/
+
+.info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 50px;
+  z-index: 3;
+
+  background-color: #aef6a2;
+  opacity:0.8;
+  border: 3px solid #502870;
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  animation: surgir 0.5s forwards;
+}
+
+
+.fa-xmark {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.info h2 {
+  margin-bottom: 15px;
+}
+
+.info p {
+  color: #502870;
+  margin-top: 5px;
+  text-align: justify;
+}
+
+.info a {
+  font-weight: bolder;
+  color:#502870;
+  text-decoration: none;
+
+  transition: color 0.5s;
+}
+
+.info a:hover {
+  color: #502870;
 }
 
 /** JOGO **/
