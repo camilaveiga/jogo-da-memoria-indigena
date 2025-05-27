@@ -23,6 +23,6 @@ O objetivo do jogo é encontrar pares de cartas: uma carta exibe uma palavra rel
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/camilaveiga/jogo-da-memoria-indigena.git
    cd seu-repositorio
 
